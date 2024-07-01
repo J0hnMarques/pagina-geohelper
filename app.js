@@ -19,10 +19,11 @@ app.use(session({
 
 // Configuração do MySQL
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: '10.94.1.3',
+    user: 'admin',
     password: '12345',
-    database: 'mydatabase'
+    database: 'geohelper',
+    port: 3306
 });
 
 db.connect((err) => {
