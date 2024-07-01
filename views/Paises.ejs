@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="Pt-Br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Geo Helper</title>
+        <link rel="stylesheet" href="/pesquisa-texto/style.css">
+        <link rel="stylesheet" href="/pesquisa-texto/addpais.css">
+        <link rel="shortcut icon" type="image/png" href="favicon.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css">
+        <script src="https://kit.fontawesome.com/57c017c42a.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <p class="info"><strong>DISCORD</strong><span>#jofuturo</span></p>
+        <header class="header">
+            <div class="titulo-Icon">
+                <i class="fa-solid fa-earth-americas" style="color: #ffffff; font-size: 50px;"></i>
+                <h1>Geo Helper</h1>
+            </div>
+        
+            <div class="hamburguer-menu" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        
+            <div class="hamburguer-nav">
+                <div class="fechar-menu" aria-label="Fechar menu">×</div>
+                <div class="nav-botoes">
+
+                    <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+                        <div class="addpais">
+                        <button class="toggle-button" onclick="toggleForm()">Adicionar Novo País</button>
+                        <div class="add-country" id="add-country-section">
+                            <h2 style="text-align: center; color: white;">Adicionar Novo</h2>
+                            <form id="add-country-form" class="fodase">
+                                <label for="country-name" style="color: white;text-align:center;">Nome</label>
+                                <input type="text" id="country-name" name="country_name" required><br><br>
+        
+                                <label for="license-plate-color" style="color: white;text-align:center;">Cor da Placa</label>
+                                <select id="license-plate-color" name="license_plate_color">
+                                    <option value>Escolha uma opção</option>
+                                    <option value="Branca">Branca</option>
+                                    <option value="Grande e branca">Grande e branca</option>
+                                    <option value="Azul">Azul</option>
+                                    <option value="Verde">Verde</option>
+                                    <option value="Linha Azul união com amarelo">Linha Azul união com amarelo</option>
+                                    <option value="união com amarelo só atras">união com amarelo só atras</option>
+                                    <option value="Linha Azul união europeia">Linha Azul união europeia</option>
+                                    <option value="Linha Azul e amarelo na outra extremidade">Linha Azul e amarelo na outra extremidade</option>
+                                    <option value="Linha Azul nas duas extremidades">Linha Azul nas duas extremidades</option>
+                                    <option value="Preta">Preta</option>
+                                    <option value="Vermelha">Vermelha</option>
+                                    <option value="Laranja">Laranja</option>
+                                    <option value="Amarela">Amarela</option>
+                                    <option value="Maior na frente e laranja">Maior na frente e laranja</option>
+                                    <option value="Maior atras e laranja">Maior atras e laranja</option>
+                                    <option value="Branca com listra vermelha">Branca com listra vermelha</option>
+                                    <option value="Branca com listra vermelha amarelo atras">Branca com listra vermelha amarelo atras</option>
+                                    <option value="Laranja Frente e Atrás">Laranja Frente e Atrás</option>
+                                    <option value="Laranja somente atrás">Laranja somente atrás</option>
+                                </select><br><br>
+        
+                                <label for="highway-color" style="color: white;text-align:center;">Cor das Linhas</label>
+                                <select id="highway-color" name="highway_color">
+                                    <option value>Escolha uma opção</option>
+                                    <option value="Margens brancas e meio amarelo">Margens brancas e meio amarelo</option>
+                                    <option value="Branca lateral e meio branco">Branca lateral e meio branco</option>
+                                    <option value="Branca lateral e meio branco e amarelo">Branca lateral e meio branco e amarelo</option>
+                                    <option value="Branca central e lateral amarela">Branca central e lateral amarela</option>
+                                    <option value="Margens amarelas e meio branco">Margens amarelas e meio branco</option>
+                                    <option value="Margens amarelas e meio amarelo">Margens amarelas e meio amarelo</option>
+                                    <option value="Branca central e lateral Pontilhada">Branca central e lateral Pontilhada</option>
+                                    <option value="Pontilhada Longa Lateral">Pontilhada Longa Lateral</option>
+                                    <option value="Pontilhada Curto Lateral">Pontilhada Curto Lateral</option>
+                                </select><br><br>
+        
+                                <label for="pedestrian-sign" style="color: white;text-align:center;">Placa de Pedestre</label>
+                                <select id="pedestrian-sign" name="pedestrian_sign">
+                                    <option value>Escolha uma opção</option>
+                                    <option value="Sem Linhas">Sem Linhas</option>
+                                    <option value="1 Linha">1 Linha</option>
+                                    <option value="2 Linhas">2 Linhas</option>
+                                    <option value="3 Linhas">3 Linhas</option>
+                                    <option value="4 Linhas">4 Linhas</option>
+                                    <option value="5 Linhas">5 Linhas</option>
+                                    <option value="6 Linhas">6 Linhas</option>
+                                    <option value="7 Linhas">7 Linhas</option>
+                                    <option value="8 Linhas">8 Linhas</option>
+                                    <option value="1 Linha horizontal">1 Linha horizontal</option>
+                                    <option value="2 Linhas horizontais">2 Linhas horizontais</option>
+                                    <option value="1 Linha horizontal pontilhada">1 Linha horizontal pontilhada</option>
+                                    <option value="2 Linha horizontal pontilhadas">2 Linha horizontal pontilhadas</option>
+                                </select><br><br>
+        
+                                <label for="follow-cars" style="color: white;text-align:center;">Carros Seguindo</label>
+                                <select id="follow-cars" name="follow_cars">
+                                    <option value>Escolha uma opção</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select><br><br>
+        
+                                <label for="unique-features" style="color: white;text-align:center;">Características Únicas</label>
+                                <input type="text" id="unique-features" name="unique_features"><br><br>
+        
+                                <button type="submit" id="botao">Adicionar País</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+        
+                    <nav class="header-nav">
+                        <ul>
+                            <li>
+                                <a href="/" id="myLink"><span id="spanText" style="cursor: pointer;"></span></a>
+                            </li>
+                            <li><a href="https://www.geoguessr.com/multiplayer" target="_blank">Jogar</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        
+    
+
+
+
+
+
+
+
+
+
+        <div id="container" class="container"></div>
+                <div style="width:100%;height:1px;background-color:azure; border-radius:75px;"><span></span></div>
+                    
+
+
+            
+
+            <div class="layout">
+
+                <div id="messageBox"></div>
+                <div class="filters">
+                    <div class="wrapper">
+                        <div class="filter filter-search">
+                            <label for="search">Busca Por Caracteristicas</label>
+                            <div class="field">
+                                <input type="text" placeholder="Escreva..."
+                                    class="search-input" name="search"
+                                    id="search" />
+                                <div class="clear-search is-hidden"
+                                    id="clear-search"><i
+                                        class="fas fa-times"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="filter">
+                            <label for="filter-locs">Cor da Placa</label>
+                            <div class="field">
+                                <select name="filter-locs" id="filter-locs">
+                                    <option value>Todas as Cores</option>
+                                    <option value="white">Branca</option>
+                                    <option value="blue">Azul</option>
+                                    <option value="green">Verde</option>
+                                    <option value="blue_stripes">Linhas
+                                        Azuis</option>
+                                    <option value="black">Preta</option>
+                                    <option value="red">Vermelha</option>
+                                    <option value="orange">Laranja</option>
+                                    <option value="orange_rear">Laranja só
+                                        atrás</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filter">
+                            <label for="filter-type">Mão Inglesa</label>
+                            <div class="field">
+                                <select name="filter-type" id="filter-type">
+                                    <option value>Todas as Opções</option>
+                                    <option value="right">Sim</option>
+                                    <option value="left">Não</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filter">
+                            <label for="filter-category">Continente</label>
+                            <div class="field">
+                                <select name="filter-category"
+                                    id="filter-category">
+                                    <option value>Todos os Continentes</option>
+                                    <option value="north_america">América do
+                                        Norte</option>
+                                    <option value="south_america">América do
+                                        Sul</option>
+                                    <option value="europe">Europa</option>
+                                    <option value="africa">África</option>
+                                    <option value="asia">Ásia</option>
+                                    <option value="oceania">Oceania</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filter">
+                            <label for="filter-tag">Características
+                                Únicas</label>
+                            <div class="field">
+                                <select name="filter-tag" id="filter-tag">
+                                    <option value>Todas as
+                                        Características</option>
+                                    <!-- Opções de características únicas serão adicionadas dinamicamente -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filter">
+                            <label for="filter-highway-color">Cor das
+                                Linhas</label>
+                            <div class="field">
+                                <select name="filter-highway-color"
+                                    id="filter-highway-color">
+                                    <option value>Todas as Cores</option>
+                                    <!-- Opções de cores de linha serão adicionadas dinamicamente -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filter">
+                            <label for="filter-pedestrian-sign">Placa de
+                                Pedestre</label>
+                            <div class="field">
+                                <select name="filter-pedestrian-sign"
+                                    id="filter-pedestrian-sign">
+                                    <option value>Todas as Opções</option>
+                                    <option value="yes">Sim</option>
+                                    <option value="no">Não</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filter">
+                            <label for="filter-follow-cars">Carros
+                                Seguindo</label>
+                            <div class="field">
+                                <select name="filter-follow-cars"
+                                    id="filter-follow-cars">
+                                    <option value>Todas as Opções</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="maps">
+                    <div class="wrapper">
+                        <table id="maps" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th data-col="country_name"
+                                        id='filter-background'>Nome do País</th>
+                                    <th data-col="domain">Domínio</th>
+                                    <th data-col="driving_side">Mão Inglesa</th>
+                                    <th data-col="continent">Continente</th>
+                                    <th data-col="license_plate_color">Cor da
+                                        Placa</th>
+                                    <th data-col="highway_color">Cor das
+                                        Linhas</th>
+                                    <th data-col="pedestrian_sign">Placa de
+                                        Pedestre</th>
+                                    <th data-col="follow_cars">Carros
+                                        Seguindo</th>
+                                    <th data-col="updated">Adicionado</th>
+                                    <th data-col="tags">Características
+                                        Únicas</th>
+                                    <th>Operações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="modal" id="modal">
+                            <div id="modalContent">
+                                <!-- Conteúdo da janela modal será preenchido dinamicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var name = "<%= name %>"; // Atribua o valor da variável 'name' aqui
+
+    document.getElementById('spanText').textContent = name;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </script>
+
+            <script src="/pesquisa-texto/main.js" defer></script>
+            <script src="/pesquisa-texto/addpais.js" async></script>
+            <script src="/pesquisa-texto/test.js"></script>
+            <script src="/pesquisa-texto/exclusaopais.js"></script>
+        </body>
+    </html>

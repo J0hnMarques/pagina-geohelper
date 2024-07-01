@@ -1,0 +1,371 @@
+/* Padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+/* Personalizando a barra de rolagem */
+
+/* Barra de rolagem */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+/* Botão de rolagem */
+::-webkit-scrollbar-thumb {
+    background: #2f52ee;
+}
+
+/* Botão de rolagem ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Botão de rolagem ativo */
+::-webkit-scrollbar-thumb:active {
+    background: #333;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Cabeçalho */
+.header {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: black;
+    color: white;
+}
+
+.titulo-Icon {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-nav ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.header-nav li {
+    list-style: none;
+}
+
+.header-nav a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #007bff;
+}
+
+.header-nav a::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.header-nav a:hover::before {
+    transform: scaleX(1);
+}
+
+/* Vídeo de fundo */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 88vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Conteúdo Principal */
+.main {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    
+}
+
+#home {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+
+
+
+
+
+/* Seção de Ajuda */
+@keyframes rotate {
+    from {
+        transform: rotate(270deg);
+    }
+    to {
+        transform: (360deg);
+    }
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#Ajuda {
+    width: 100%;
+    max-width: 800px;
+    height: 70vh;
+    
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    animation: pulse 0.4s linear 1; /* Adiciona a animação */
+}
+
+#Ajuda h2 {
+    margin-bottom: 1rem;
+}
+
+#Ajuda p {
+    margin-bottom: 1rem;
+}
+
+
+.footer{
+    color: white;
+    background-color: black;
+    text-align: center;
+    position: relative;
+    top: 7vh;
+    height: 4vh;
+    z-index: 2;
+}
+
+
+
+
+
+
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+
+.modal-content {
+    background-color: #2f2f2f;
+    margin: 5% auto;
+    padding: 20px;
+    border: 0px solid #e3e3e3;
+    width: 80%;
+    max-width: 300px;
+    position: relative;
+    color: #ffffff;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
+    border-radius: 25px;
+    left: 40vh;
+    bottom: 10vh;
+    animation-name: flipInY;
+    animation-duration: 0.5s;
+    background-image: url('/imagem.png');
+    font-weight: 400;
+}
+
+.fds a{
+    color: rgba(82, 217, 235, 0.767);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+.fds a:hover{
+    color: white;
+    text-decoration: none;
+    background-color: #55555544;
+    border-radius: 25px;
+    box-shadow: 15px 10px 15px 14px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
+}
+
+@keyframes flipInY {
+    from {
+        transform: perspective(400px) rotateY(90deg);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(400px) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabs {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+}
+
+.tab-link {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: #333;
+}
+
+.tab-link.active {
+    background-color: #ccc;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.cancel {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.cancel:hover {
+    background-color: #555;
+}
+
+
+
+
+        /* Responsividade */
+@media (max-width: 768px) {
+    .header-nav ul {
+        flex-direction: column;
+    }
+
+    .header-nav li {
+        margin-bottom: 10px;
+    }
+
+    .modal {
+        width: 80%;
+        max-width: 400px;
+    }
+}

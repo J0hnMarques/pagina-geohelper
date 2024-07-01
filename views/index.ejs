@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Helper</title>
+    <link rel="stylesheet" href="/Styles/main.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        .overlay, .feedback-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .modal-content .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .modal-content .close:hover {
+            color: #333;
+        }
+
+        .feedback-message {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/57c017c42a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="titulo-Icon">
+            <i class="fa-solid fa-earth-americas" style="color: #ffffff; font-size: 50px;"></i>
+            <h1>Geo Helper</h1>
+        </div>
+
+        <nav class="header-nav">
+            <ul>
+                <li>
+                    <a href="/" id="myLink"><span id="spanText" style="cursor: pointer;"></span></a>
+                </li>
+                <li><a href="#" id="link-login" onclick="toggleLogin()">Fazer Login</a></li>
+                <li><a href="/pesquisa-por-texto">Pesquisa por texto</a></li>
+                <li><a href="#services">Pesquisa avançada</a></li>
+                <li><a href="https://www.geoguessr.com/multiplayer" target="_blank">Jogar</a></li>
+            </ul>
+        </nav>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="hideLogin()">&times;</span>
+                <p>Login: <span id="usernameSpan"></span></p>
+                <p>Criado: <span id="createdAtSpan"></span></p>
+                <div class="fds" style="display: none;">
+                    <a href="#" id="botao-info-login" onclick="showChangePassword()">Alterar a senha</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="container" class="container"></div>
+
+    <div id="overlay" class="overlay">
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'login')">Login</button>
+            <button class="tab-link" onclick="openTab(event, 'register')">Registrar</button>
+        </div>
+        <!-- Conteúdo das abas -->
+        <div id="login" class="tab-content active">
+            <h2>Fazer Login</h2>
+            <form id="login-form" onsubmit="return validateLoginForm()">
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+                <p id="login-error-message" style="color: red; display: none;"></p>
+            </form>
+        </div>
+
+        <div id="register" class="tab-content">
+            <h2>Registrar</h2>
+            <form id="register-form">
+                <input type="text" name="name" placeholder="Nome" required>
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Registrar</button>
+                <p id="register-message" style="display: none;"></p>
+            </form>
+        </div>
+        <button class="tab-link cancel" onclick="hideLogin()">Fechar</button>
+    </div>
+
+    <div id="change-password-form" class="overlay" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="hideChangePassword()">&times;</span>
+            <h2>Alterar Senha</h2>
+            <div>
+                <label for="currentPassword">Senha Atual:</label>
+                <input type="password" id="currentPassword" name="currentPassword" required>
+            </div>
+            <div>
+                <label for="newPassword">Nova Senha:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+            </div>
+            <div>
+                <label for="confirmPassword">Confirmar Nova Senha:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit" onclick="changePassword()">Alterar Senha</button>
+            <p id="change-password-message" style="color: red; display: none;"></p>
+        </div>
+    </div>
+    
+
+    <!-- Conteúdo Principal -->
+    <main class="main">
+        <div class="video-background">
+            <video id="bg-video" autoplay muted loop>
+                <source src="/video/video.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+
+        <section id="home">
+        </section>
+        <section id="Ajuda">
+            <h2>Ajuda</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>&copy; 2024 GeoHelper</p>
+    </footer>
+
+    <script>
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var name = "<%= name %>"; // Atribua o valor da variável 'name' aqui
+            var username = "<%= username %>"; // Atribua o valor da variável 'username' aqui
+            var createdAt = "<%= createdAt %>"; // Atribua o valor da variável 'createdAt' aqui
+
+            document.getElementById('spanText').textContent = name;
+            document.getElementById('usernameSpan').textContent = username;
+            document.getElementById('createdAtSpan').textContent = createdAt;
+
+            if (username) {
+                document.getElementById('link-login').style.display = 'none';
+                document.querySelector('.fds').style.display = 'inline-block';
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+// Função para validar o formulário de login
+function validateLoginForm() {
+    var username = document.querySelector('#login-form input[name="username"]').value;
+    var password = document.querySelector('#login-form input[name="password"]').value;
+    var errorMessage = document.getElementById('login-error-message');
+
+    if (username === '' || password === '') {
+        errorMessage.textContent = 'Por favor, preencha todos os campos.';
+        errorMessage.style.display = 'block';
+        return false; // Impede o envio do formulário
+    } else {
+        errorMessage.style.display = 'none';
+        return true; // Permite o envio do formulário
+    }
+}
+
+// Event listener para o formulário de login
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio padrão do formulário
+
+    var formData = {
+        username: document.querySelector('#login-form input[name="username"]').value,
+        password: document.querySelector('#login-form input[name="password"]').value
+    };
+
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao efetuar login. Status do servidor: ' + response.status);
+        }
+        // Verifique o tipo de conteúdo retornado (JSON ou texto)
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json(); // Se for JSON, parseie a resposta
+        } else {
+            return response.text(); // Se não for JSON, obtenha o texto da resposta
+        }
+    })
+    .then(data => {
+        // Aqui você pode decidir o que fazer com os dados retornados pelo servidor
+        console.log('Resposta do servidor:', data);
+        // Exibir mensagem de sucesso
+        var successMessage = document.getElementById('login-error-message');
+        successMessage.textContent = 'Login realizado com sucesso!';
+        successMessage.style.color = 'green';
+        successMessage.style.display = 'block';
+
+        // Fechar o overlay após 1 segundo
+        setTimeout(function() {
+            hideLogin(); // Função para esconder o overlay de login
+            location.reload(); // Recarrega a página
+        }, 1000);
+    })
+    .catch(error => {
+        var errorMessage = document.getElementById('login-error-message');
+        if (error.message.includes('401')) {
+            errorMessage.textContent = 'Credenciais inválidas! Verifique seu usuário e senha.';
+        } else {
+            errorMessage.textContent = 'Erro ao processar a requisição: ' + error.message;
+        }
+        errorMessage.style.display = 'block';
+        console.error('Erro:', error);
+    });
+});
+
+// Event listener para o formulário de registro
+document.getElementById('register-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio padrão do formulário
+
+    var formData = {
+        name: document.querySelector('#register-form input[name="name"]').value,
+        username: document.querySelector('#register-form input[name="username"]').value,
+        password: document.querySelector('#register-form input[name="password"]').value
+    };
+
+    fetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        var messageElement = document.getElementById('register-message');
+        messageElement.style.display = 'block';
+        if (data.success) {
+            // Mostrar mensagem de sucesso
+            messageElement.style.color = 'green';
+            messageElement.textContent = data.message;
+
+            // Fechar o overlay após 1 segundo
+            setTimeout(function() {
+                hideRegister(); // Função para esconder o overlay de registro
+                location.reload();
+            }, 1000);
+        } else {
+            // Mostrar mensagem de erro
+            messageElement.style.color = 'red';
+            messageElement.textContent = data.message;
+        }
+    })
+    .catch(error => {
+        var messageElement = document.getElementById('register-message');
+        messageElement.style.color = 'red';
+        messageElement.textContent = 'Erro ao processar a requisição: ' + error.message;
+        messageElement.style.display = 'block';
+        console.error('Erro:', error);
+    });
+});
+
+// Função para alternar a visibilidade do link de login
+function toggleLogin() {
+    var linkLogin = document.getElementById('link-login');
+    linkLogin.style.display = 'none'; // Esconder o link de login
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = 'flex'; // Mostrar o overlay de login
+}
+
+// Função para exibir a tela de alterar senha
+function showChangePassword() {
+    var overlay = document.getElementById('change-password-form');
+    overlay.style.display = 'flex'; // Mostrar o overlay de alterar senha
+}
+
+// AJAX para alterar a senha
+function changePassword() {
+    const formData = {
+        currentPassword: document.getElementById('currentPassword').value,
+        newPassword: document.getElementById('newPassword').value,
+        confirmPassword: document.getElementById('confirmPassword').value
+    };
+
+    // Verifica se a nova senha e a confirmação são iguais
+    if (formData.newPassword !== formData.confirmPassword) {
+        var messageElement = document.getElementById('change-password-message');
+        messageElement.textContent = 'Nova senha e confirmação não coincidem';
+        messageElement.style.display = 'block';
+        return;
+    }
+
+    fetch('/change-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na resposta do servidor');
+        }
+        return response.text();
+    })
+    .then(data => {
+        var messageElement = document.getElementById('change-password-message');
+        if (!messageElement) {
+            console.error('Elemento de mensagem não encontrado');
+            return;
+        }
+
+        messageElement.textContent = data;
+        messageElement.style.display = 'block';
+
+        if (data.includes("successfully")) {
+            setTimeout(function() {
+                hideChangePassword(); // Fechar o modal após 3 segundos
+            }, 3000);
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
+}
+
+// Função para fechar a tela de login
+function hideLogin() {
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = 'none'; // Esconder o overlay de login
+    location.reload();
+}
+
+// Função para fechar a tela de registro
+function hideRegister() {
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = 'none'; // Esconder o overlay de registro
+}
+
+// Função para fechar a tela de alterar senha
+function hideChangePassword() {
+    var overlay = document.getElementById('change-password-form');
+    overlay.style.display = 'none'; // Esconder o overlay de alterar senha
+}
+
+// Função para alternar entre as abas
+function openTab(evt, tabName) {
+    var i, tabContent, tabLinks;
+    tabContent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+    }
+    tabLinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    if (evt) {
+        evt.currentTarget.className += " active";
+    } else {
+        var activeTabLink = document.querySelector('.tab-link[data-tab="' + tabName + '"]');
+        activeTabLink.className += " active";
+    }
+}
+
+    </script>
+    <script src="/Scripts/script.js"></script>
+</body>
+</html>
