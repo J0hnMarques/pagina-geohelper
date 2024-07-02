@@ -5,51 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geo Helper</title>
     <link rel="stylesheet" href="/Styles/main.css">
+    <link rel="stylesheet" href="/Styles/styles.css">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-        .overlay, .feedback-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            width: 400px;
-            max-width: 90%;
-        }
-
-        .modal-content .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            color: #888;
-        }
-
-        .modal-content .close:hover {
-            color: #333;
-        }
-
-        .feedback-message {
-            font-size: 18px;
-            text-align: center;
-            margin-top: 20px;
-        }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap');
     </style>
+    
     <script src="https://kit.fontawesome.com/57c017c42a.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -57,29 +19,37 @@
     <!-- Cabeçalho -->
     <header class="header">
         <div class="titulo-Icon">
-            <i class="fa-solid fa-earth-americas" style="color: #ffffff; font-size: 50px;"></i>
+            <i class="fa-solid fa-earth-americas" style="font-size: 50px;"></i>
             <h1>Geo Helper</h1>
         </div>
-
+        <div class="hamburguer-menu" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    <div class="hamburguer-nav">
+        <div class="fechar-menu" aria-label="Fechar menu">×</div> 
+        
         <nav class="header-nav">
             <ul>
+                <li><a href="#" id="link-login" onclick="toggleLogin()">Fazer Login</a></li>
                 <li>
                     <a href="/" id="myLink"><span id="spanText" style="cursor: pointer;"></span></a>
                 </li>
-                <li><a href="#" id="link-login" onclick="toggleLogin()">Fazer Login</a></li>
-                <li><a href="/pesquisa-por-texto">Pesquisa por texto</a></li>
-                <li><a href="#services">Pesquisa avançada</a></li>
+                <li><a href="/Simples">Pesquisa Simples</a></li>
+                <li><a href="#services">Pesquisa Avançada</a></li>
                 <li><a href="https://www.geoguessr.com/multiplayer" target="_blank">Jogar</a></li>
             </ul>
         </nav>
+    </div>    
 
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="hideLogin()">&times;</span>
-                <p>Login: <span id="usernameSpan"></span></p>
-                <p>Criado: <span id="createdAtSpan"></span></p>
+                <p style="font: bold;"><strong>Login: </strong><strong><span id="usernameSpan" style="color: blue; font-size: 20px;"></span></strong></p>
+                <p style="font: bold;"><strong>Criado em: </strong><strong><span id="createdAtSpan" style="color: blue; font-size: 20px;"></span></strong></p>
                 <div class="fds" style="display: none;">
-                    <a href="#" id="botao-info-login" onclick="showChangePassword()">Alterar a senha</a>
+                    <a href="#" id="botao-info-login" onclick="showChangePasswordForm()">Alterar a senha</a>
                     <a href="/logout">Logout</a>
                 </div>
             </div>
@@ -89,55 +59,59 @@
     <div id="container" class="container"></div>
 
     <div id="overlay" class="overlay">
+<div class="login">
+<div class="login-interno">
         <div class="tabs">
             <button class="tab-link active" onclick="openTab(event, 'login')">Login</button>
             <button class="tab-link" onclick="openTab(event, 'register')">Registrar</button>
         </div>
         <!-- Conteúdo das abas -->
         <div id="login" class="tab-content active">
-            <h2>Fazer Login</h2>
+        <div class="formulario-login">  
             <form id="login-form" onsubmit="return validateLoginForm()">
+                <h2>Fazer Login</h2>
                 <input type="text" name="username" placeholder="Usuário" required>
                 <input type="password" name="password" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
                 <p id="login-error-message" style="color: red; display: none;"></p>
             </form>
         </div>
-
+    </div>
         <div id="register" class="tab-content">
-            <h2>Registrar</h2>
+    <div class="formulario-login">
             <form id="register-form">
+                <h2>Registrar</h2>
                 <input type="text" name="name" placeholder="Nome" required>
                 <input type="text" name="username" placeholder="Usuário" required>
                 <input type="password" name="password" placeholder="Senha" required>
                 <button type="submit">Registrar</button>
                 <p id="register-message" style="display: none;"></p>
             </form>
-        </div>
+    </div>
+</div>
+</div>
         <button class="tab-link cancel" onclick="hideLogin()">Fechar</button>
     </div>
 
-    <div id="change-password-form" class="overlay" style="display: none;">
-        <div class="modal-content">
-            <span class="close" onclick="hideChangePassword()">&times;</span>
+
+</div>  
+    <!-- Overlay para alterar senha -->
+    <div id="changePasswordOverlay" class="custom-overlay" style="display: none;">
+        <div class="custom-modal-content">
+            <span class="custom-close" onclick="hideChangePasswordForm()">&times;</span>
             <h2>Alterar Senha</h2>
-            <div>
+            <form id="changePasswordForm">
                 <label for="currentPassword">Senha Atual:</label>
-                <input type="password" id="currentPassword" name="currentPassword" required>
-            </div>
-            <div>
+                <input type="password" id="currentPassword" name="currentPassword" required><br>
                 <label for="newPassword">Nova Senha:</label>
-                <input type="password" id="newPassword" name="newPassword" required>
-            </div>
-            <div>
+                <input type="password" id="newPassword" name="newPassword" required><br>
                 <label for="confirmPassword">Confirmar Nova Senha:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-            </div>
-            <button type="submit" onclick="changePassword()">Alterar Senha</button>
-            <p id="change-password-message" style="color: red; display: none;"></p>
+                <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+                <button type="button" onclick="changePassword()">Alterar Senha</button>
+                <p id="changePasswordMessage" style="color: red; display: none;"></p>
+            </form>
         </div>
     </div>
-    
 
     <!-- Conteúdo Principal -->
     <main class="main">
@@ -151,50 +125,131 @@
         <section id="home">
         </section>
         <section id="Ajuda">
-            <h2>Ajuda</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, quam totam blanditiis dignissimos officia nesciunt nam vero explicabo obcaecati nobis, autem ut. Ipsum officiis ullam commodi rem libero, dolor iusto.</p>
+            <h1>Qual objetivo desse projeto?</h1>
+ 
+
+            <div class="content">
+                <p>Auxiliar jogadores de geoguessr em todo o mundo nas suas partidas, sendo um helper. Temos uma <strong style="color: aqua;">API</strong> poderosa implantada que foi desenvolvida por nós, que funciona como um grande filtro complexo e completo, que é atualizado frequentemente. Facilitando sua jogatina</p>
+                
+                <div style="display: flex; justify-content: center; gap: 2vh;"><i class="fa-solid fa-arrow-down" style="font-size: 25px;"></i><h4><strong style="color: aqua;">Funciona Assim</strong></h4><i class="fa-solid fa-arrow-down" style="font-size: 25px;"></i></div>
+        <div class="div-conteúdo-centro">
+            <div class="titulo-conteúdo-centro">
+                <div class="clickable-div" onclick="openOverlay(1)">
+                    <p>Como uso isso ?</p>
+                </div>
+            </div>    
+                <div class="clickable-div" onclick="openOverlay(2)">
+                    <p>Tipos de busca</p>
+                </div>
+                <div class="clickable-div" onclick="openOverlay(3)">
+                    <p>alguma duvida ?</p>
+                </div>
+                <div class="clickable-div" onclick="openOverlay(4)">
+                    <p>Pode dar <strong style="color: red; font: bold;">ban</strong> ?</p>
+                </div>
+            </div>
+        </div>
+            
+            <div class="ajuda-overlay" id="ajuda-overlay-1">
+                <div class="overlay-content">
+                    <span class="close" onclick="closeOverlay(1)">×</span>
+                    <h2>Título do Overlay 1</h2>
+                    <p>Conteúdo do overlay 1.</p>
+                </div>
+            </div>
+            
+            <div class="ajuda-overlay" id="ajuda-overlay-2">
+                <div class="overlay-content">
+                    <span class="close" onclick="closeOverlay(2)">×</span>
+                    <h2>Título do Overlay 2</h2>
+                    <p>Conteúdo do overlay 2.</p>
+                </div>
+            </div>
+            
+            <div class="ajuda-overlay" id="ajuda-overlay-3">
+                <div class="overlay-content">
+                    <span class="close" onclick="closeOverlay(3)">×</span>
+                    <h2>Título do Overlay 3</h2>
+                    <p>Conteúdo do overlay 3.</p>
+                </div>
+            </div>
+            
+            <div class="ajuda-overlay" id="ajuda-overlay-4">
+                <div class="overlay-content">
+                    <span class="close" onclick="closeOverlay(4)">×</span>
+                    <h2>Título do Overlay 4</h2>
+                    <p>Conteúdo do overlay 4.</p>
+                </div>
+            </div>
+
+
+
+
+
+
+
         </section>
+
+
+
+
+
+
+
+
+        <footer class="footer">
+            <p>&copy; 2024 GeoHelper</p>
+        </footer>
+    
     </main>
 
     <!-- Rodapé -->
-    <footer class="footer">
-        <p>&copy; 2024 GeoHelper</p>
-    </footer>
+
 
     <script>
+// Função para abrir o overlay
+function openOverlay(id) {
+    const overlayId = `ajuda-overlay-${id}`;
+    const overlay = document.getElementById(overlayId);
+    overlay.classList.add("active");
+}
 
+// Função para fechar o overlay
+function closeOverlay(id) {
+    const overlayId = `ajuda-overlay-${id}`;
+    const overlay = document.getElementById(overlayId);
+    const overlayContent = overlay.querySelector(".overlay-content");
+    overlayContent.classList.add("closing");
+    setTimeout(() => {
+        overlay.classList.remove("active");
+        overlayContent.classList.remove("closing");
+    }, 500); // Tempo correspondente à duração da animação closeOverlay (0.5s)
+}
 
+// Event listener para fechar o overlay quando clicar no botão .close
+document.querySelectorAll(".close").forEach(button => {
+    button.addEventListener("click", function() {
+        const overlayId = this.dataset.overlayId;
+        closeOverlay(overlayId);
+    });
+});
 
-
+// Event listener para o carregamento do DOM
 document.addEventListener('DOMContentLoaded', function() {
-            var name = "<%= name %>"; // Atribua o valor da variável 'name' aqui
-            var username = "<%= username %>"; // Atribua o valor da variável 'username' aqui
-            var createdAt = "<%= createdAt %>"; // Atribua o valor da variável 'createdAt' aqui
+    // Replace with actual values if using server-side templating
+    var name = "<%= name %>";
+    var username = "<%= username %>";
+    var createdAt = "<%= createdAt %>";
 
-            document.getElementById('spanText').textContent = name;
-            document.getElementById('usernameSpan').textContent = username;
-            document.getElementById('createdAtSpan').textContent = createdAt;
+    document.getElementById('spanText').textContent = name;
+    document.getElementById('usernameSpan').textContent = username;
+    document.getElementById('createdAtSpan').textContent = createdAt;
 
-            if (username) {
-                document.getElementById('link-login').style.display = 'none';
-                document.querySelector('.fds').style.display = 'inline-block';
-            }
-        });
-
-
-
-
-
-
-
-
-
-
+    if (username) {
+        document.getElementById('link-login').style.display = 'none';
+        document.querySelector('.fds').style.display = 'inline-block';
+    }
+});
 
 // Função para validar o formulário de login
 function validateLoginForm() {
@@ -258,7 +313,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     .catch(error => {
         var errorMessage = document.getElementById('login-error-message');
         if (error.message.includes('401')) {
-            errorMessage.textContent = 'Credenciais inválidas! Verifique seu usuário e senha.';
+            errorMessage.textContent = 'Senha inválida! Verifique seu usuário e senha.';
         } else {
             errorMessage.textContent = 'Erro ao processar a requisição: ' + error.message;
         }
@@ -321,27 +376,31 @@ function toggleLogin() {
     overlay.style.display = 'flex'; // Mostrar o overlay de login
 }
 
-// Função para exibir a tela de alterar senha
-function showChangePassword() {
-    var overlay = document.getElementById('change-password-form');
-    overlay.style.display = 'flex'; // Mostrar o overlay de alterar senha
+// Função para mostrar o overlay de alterar senha
+function showChangePasswordForm() {
+    var overlay = document.getElementById('changePasswordOverlay');
+    overlay.style.display = 'flex';
 }
 
-// AJAX para alterar a senha
+// Função para validar e enviar a alteração de senha via AJAX
 function changePassword() {
-    const formData = {
-        currentPassword: document.getElementById('currentPassword').value,
-        newPassword: document.getElementById('newPassword').value,
-        confirmPassword: document.getElementById('confirmPassword').value
-    };
+    var currentPassword = document.getElementById('currentPassword').value;
+    var newPassword = document.getElementById('newPassword').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+    var errorMessage = document.getElementById('changePasswordMessage');
 
     // Verifica se a nova senha e a confirmação são iguais
-    if (formData.newPassword !== formData.confirmPassword) {
-        var messageElement = document.getElementById('change-password-message');
-        messageElement.textContent = 'Nova senha e confirmação não coincidem';
-        messageElement.style.display = 'block';
+    if (newPassword !== confirmPassword) {
+        errorMessage.textContent = 'Nova senha e confirmação não coincidem.';
+        errorMessage.style.display = 'block';
         return;
     }
+
+    var formData = {
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword
+    };
 
     fetch('/change-password', {
         method: 'POST',
@@ -350,50 +409,44 @@ function changePassword() {
         },
         body: JSON.stringify(formData)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro na resposta do servidor');
-        }
-        return response.text();
-    })
+    .then(response => response.json()) // Parseia a resposta como JSON
     .then(data => {
-        var messageElement = document.getElementById('change-password-message');
-        if (!messageElement) {
-            console.error('Elemento de mensagem não encontrado');
-            return;
-        }
+        errorMessage.textContent = data.message;
+        errorMessage.style.color = data.success ? 'green' : 'red';
+        errorMessage.style.display = 'block';
 
-        messageElement.textContent = data;
-        messageElement.style.display = 'block';
-
-        if (data.includes("successfully")) {
+        if (data.success) {
             setTimeout(function() {
-                hideChangePassword(); // Fechar o modal após 3 segundos
-            }, 3000);
+                hideChangePasswordForm();
+                location.reload(); // Recarrega a página após a alteração bem-sucedida
+            }, 2000); // Fecha o formulário após 2 segundos se a alteração for bem-sucedida
         }
     })
     .catch(error => {
+        errorMessage.textContent = 'Erro ao processar a requisição: ' + error.message;
+        errorMessage.style.display = 'block';
         console.error('Erro:', error);
     });
 }
 
+
 // Função para fechar a tela de login
 function hideLogin() {
     var overlay = document.getElementById('overlay');
-    overlay.style.display = 'none'; // Esconder o overlay de login
+    overlay.style.display = 'none'; 
     location.reload();
 }
 
 // Função para fechar a tela de registro
 function hideRegister() {
     var overlay = document.getElementById('overlay');
-    overlay.style.display = 'none'; // Esconder o overlay de registro
+    overlay.style.display = 'none'; 
 }
 
-// Função para fechar a tela de alterar senha
-function hideChangePassword() {
-    var overlay = document.getElementById('change-password-form');
-    overlay.style.display = 'none'; // Esconder o overlay de alterar senha
+// Função para esconder o overlay de alterar senha
+function hideChangePasswordForm() {
+    var overlay = document.getElementById('changePasswordOverlay');
+    overlay.style.display = 'none';
 }
 
 // Função para alternar entre as abas

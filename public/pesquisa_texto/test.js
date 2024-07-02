@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>${country.flags ? country.flags.highway : '-'}</td>
                     <td>${country.flags ? country.flags.pedestrian : '-'}</td>
                     <td>${country.flags ? country.flags.follow : '-'}</td>
-                    <td>${country.updated ? new Date(country.updated).toString() : '-'}</td>
                     <td>${country.tags ? country.tags.join(', ') : '-'}</td>
                     <td>${country.flags ? country.flags.band : '-'}</td>
                 `;

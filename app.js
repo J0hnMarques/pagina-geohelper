@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -44,7 +44,7 @@ function getCurrentDate() {
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public', 'pesquisa-texto')));
+app.use(express.static(path.join(__dirname, 'public', 'pesquisa_texto')));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -66,7 +66,7 @@ function isAdminUser(username, callback) {
 }
 
 // Rota para página de países
-app.get('/pesquisa-por-texto', (req, res) => {
+app.get('/Simples', (req, res) => {
     const username = req.session.username;
 
     // Consulta SQL para obter dados do usuário, incluindo a flag isAdmin
@@ -80,38 +80,6 @@ app.get('/pesquisa-por-texto', (req, res) => {
             const { name, createdAt, username, is_admin } = result[0];
             // Renderiza a página Paises, passando isAdmin como variável
             res.render('Paises', { name, createdAt, username, isAdmin: is_admin === 1 });
-        } else {
-            res.status(404).send('Usuário não encontrado');
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Rota para pesquisa por texto, abrindo o mesmo arquivo Paises.ejs
-app.get('/pesquisa-por-texto', (req, res) => {
-    const username = req.session.username;
-
-    // Consulta SQL para obter dados do usuário
-    db.query('SELECT name, created_at AS createdAt, username FROM users WHERE username = ?', [username], (err, result) => {
-        if (err) {
-            console.error('Erro ao buscar dados do usuário:', err);
-            return res.status(500).send('Erro ao buscar dados do usuário');
-        }
-
-        if (result.length > 0) {
-            const { name, createdAt, username } = result[0];
-            res.render('Paises', { name, createdAt, username }); // Passando os dados para o template
         } else {
             res.status(404).send('Usuário não encontrado');
         }
@@ -179,26 +147,36 @@ app.post('/change-password', async (req, res) => {
     const username = req.session.username;
 
     if (!username) {
-        return res.redirect('/login');
+        return res.status(401).json({ success: false, message: 'Usuário não autenticado!' });
     }
 
     if (newPassword !== confirmPassword) {
-        return res.send('New password and confirm password do not match!');
+        return res.status(400).json({ success: false, message: 'Nova senha e confirmação não coincidem!' });
     }
 
     db.query('SELECT password FROM users WHERE username = ?', [username], async (err, result) => {
-        if (err) throw err;
+        if (err) {
+            console.error('Erro ao buscar senha atual do usuário:', err);
+            return res.status(500).json({ success: false, message: 'Erro ao buscar senha atual do usuário' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ success: false, message: 'Usuário não encontrado!' });
+        }
 
         const isMatch = await bcrypt.compare(currentPassword, result[0].password);
         if (!isMatch) {
-            return res.send('Current password is incorrect!');
+            return res.status(401).json({ success: false, message: 'Senha atual incorreta!' });
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         db.query('UPDATE users SET password = ? WHERE username = ?', [hashedPassword, username], (err, result) => {
-            if (err) throw err;
-            res.send('Password changed successfully!');
+            if (err) {
+                console.error('Erro ao atualizar senha do usuário:', err);
+                return res.status(500).json({ success: false, message: 'Erro ao atualizar senha do usuário' });
+            }
+            res.status(200).json({ success: true, message: 'Senha alterada com sucesso!' });
         });
     });
 });
@@ -207,6 +185,30 @@ app.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
 });
+
+// Rota para verificar se o usuário é admin
+app.get('/is-admin', (req, res) => {
+    const username = req.session.username;
+
+    if (!username) {
+        return res.status(401).json({ isAdmin: false, message: 'Usuário não autenticado!' });
+    }
+
+    db.query('SELECT is_admin FROM users WHERE username = ?', [username], (err, results) => {
+        if (err) {
+            console.error('Erro ao consultar o banco de dados:', err.message);
+            return res.status(500).json({ error: 'Erro interno ao verificar permissões.' });
+        }
+
+        if (results.length > 0) {
+            const isAdmin = results[0].is_admin === 1;
+            res.json({ isAdmin });
+        } else {
+            res.json({ isAdmin: false });
+        }
+    });
+});
+
 
 app.listen(3001, () => {
     console.log('Server running on http://localhost:3001');

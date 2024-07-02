@@ -14,9 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
             countries = data; // Atualiza countries com os dados carregados
             init(); // Chama init após os dados serem carregados
         })
-        .catch(error => {
-            console.error('Erro ao carregar países:', error);
-        });
 });
 
 let selectedCol = 'country_name';
@@ -82,7 +79,6 @@ function displayCountries(col, sort_dir) {
         html += `<td>${country.highway_color}</td>`;
         html += `<td>${country.pedestrian_sign}</td>`;
         html += `<td>${country.follow_cars}</td>`;
-        html += `<td title="${new Date(country.updated).toString()}">${formatDate(country.updated)}</td>`;
 
         html += `<td><div class="tags">`;
         if (country.unique_features && country.unique_features.trim() !== '') {
@@ -96,13 +92,12 @@ function displayCountries(col, sort_dir) {
         html += `</div></td>`;
 
 
-        html += `<td><button class="delete-button" data-country="${country.country_name}">Excluir</button></td>`;
+    
         html += `</tr>`;
     }
     document.querySelector('#maps tbody').innerHTML = html;
 
     document.getElementById('maps').classList.toggle('is-hidden', countries.length === 0);
-    document.getElementById('no-results').classList.toggle('is-hidden', countries.length > 0);
 
     for (const th of document.querySelectorAll('#maps th[data-sortable]')) {
         if (th.dataset.col === col) {
@@ -154,7 +149,7 @@ function filterList() {
                 if (term.length === 0) continue;
 
                 // Verifica em várias colunas
-                for (const col of ['country_name', 'domain', 'continent', 'license_plate_color', 'updated', 'highway_color', 'pedestrian_sign', 'follow_cars']) {
+                for (const col of ['country_name', 'domain', 'continent', 'license_plate_color', 'highway_color', 'pedestrian_sign', 'follow_cars']) {
                     if (typeof country[col] !== 'string') continue;
                     if (country[col].toLowerCase().includes(term)) {
                         matched++;
@@ -193,22 +188,6 @@ function filterList() {
 
 
 
-
-function reset() {
-    countries = DATA.countries.slice();
-
-    document.getElementById('search').value = '';
-    document.getElementById('clear-search').classList.add('is-hidden');
-    document.getElementById('filter-locs').value = '';
-    document.getElementById('filter-type').value = '';
-    document.getElementById('filter-category').value = '';
-    document.getElementById('filter-tag').value = '';
-    document.getElementById('filter-highway-color').value = '';
-    document.getElementById('filter-pedestrian-sign').value = '';
-    document.getElementById('filter-follow-cars').value = '';
-
-    displayCountries(selectedCol, selectedSortDir);
-}
 
 function init() {
 
@@ -280,7 +259,6 @@ function init() {
     document.getElementById('filter-highway-color').addEventListener('change', filterList);
     document.getElementById('filter-pedestrian-sign').addEventListener('change', filterList);
     document.getElementById('filter-follow-cars').addEventListener('change', filterList);
-    document.getElementById('reset').addEventListener('click', reset);
 
     // Exibindo os países inicialmente
     if (countries && countries.length >= 0) {
@@ -300,6 +278,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
+        
+        renderTable(countries); 
+
+
 
         const formData = new FormData(form);
         const countryData = {};
@@ -359,7 +341,6 @@ document.addEventListener('DOMContentLoaded', function() {
             html += `<td>${country.highway_color}</td>`;
             html += `<td>${country.pedestrian_sign}</td>`;
             html += `<td>${country.follow_cars}</td>`;
-            html += `<td title="${new Date(country.updated).toString()}">${formatDate(country.updated)}</td>`;
             html += `<td><div class="tags">`;
             
             

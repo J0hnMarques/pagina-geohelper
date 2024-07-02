@@ -4,23 +4,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Geo Helper</title>
-        <link rel="stylesheet" href="/pesquisa-texto/style.css">
-        <link rel="stylesheet" href="/pesquisa-texto/addpais.css">
+        <link rel="stylesheet" href="/pesquisa_texto/style.css">
+        <link rel="stylesheet" href="/pesquisa_texto/addpais.css">
         <link rel="shortcut icon" type="image/png" href="favicon.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css">
         <script src="https://kit.fontawesome.com/57c017c42a.js" crossorigin="anonymous"></script>
+        <style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');</style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        <p class="info"><strong>DISCORD</strong><span>#jofuturo</span></p>
         <header class="header">
             <div class="titulo-Icon">
-                <i class="fa-solid fa-earth-americas" style="color: #ffffff; font-size: 50px;"></i>
+                <a href="/"><i class="fa-solid fa-earth-americas" style="font-size: 50px;"></i></a>
                 <h1>Geo Helper</h1>
             </div>
-        
             <div class="hamburguer-menu" onclick="toggleMenu()">
                 <div class="bar"></div>
                 <div class="bar"></div>
@@ -111,7 +111,13 @@
                         </div>
                     </div>
                 <% } %>
+
+
+
         
+
+
+
                     <nav class="header-nav">
                         <ul>
                             <li>
@@ -123,56 +129,31 @@
                 </div>
             </div>
         </header>
-        
-    
 
 
-
-
-
-
-
-
-
-        <div id="container" class="container"></div>
-                <div style="width:100%;height:1px;background-color:azure; border-radius:75px;"><span></span></div>
                     
 
 
-            
-
+        
             <div class="layout">
 
-                <div id="messageBox"></div>
+                <div class="filter filter-search" id="caixa-texto">
+                    <label for="search">Busca Por Caracteristicas</label>
+                    <div class="field">
+                        <input type="text" placeholder="Escreva..." class="search-input" name="search" id="search" />
+                        <div class="clear-search is-hidden" id="clear-search"><i class="fas fa-times"></i></div>
+                    </div>
+                </div>
+
+
                 <div class="filters">
                     <div class="wrapper">
-                        <div class="filter filter-search">
-                            <label for="search">Busca Por Caracteristicas</label>
-                            <div class="field">
-                                <input type="text" placeholder="Escreva..."
-                                    class="search-input" name="search"
-                                    id="search" />
-                                <div class="clear-search is-hidden"
-                                    id="clear-search"><i
-                                        class="fas fa-times"></i></div>
-                            </div>
-                        </div>
 
                         <div class="filter">
                             <label for="filter-locs">Cor da Placa</label>
                             <div class="field">
                                 <select name="filter-locs" id="filter-locs">
-                                    <option value>Todas as Cores</option>
-                                    <option value="white">Branca</option>
-                                    <option value="blue">Azul</option>
-                                    <option value="green">Verde</option>
-                                    <option value="blue_stripes">Linhas
-                                        Azuis</option>
-                                    <option value="black">Preta</option>
-                                    <option value="red">Vermelha</option>
-                                    <option value="orange">Laranja</option>
-                                    <option value="orange_rear">Laranja só
-                                        atrás</option>
+
                                 </select>
                             </div>
                         </div>
@@ -181,9 +162,6 @@
                             <label for="filter-type">Mão Inglesa</label>
                             <div class="field">
                                 <select name="filter-type" id="filter-type">
-                                    <option value>Todas as Opções</option>
-                                    <option value="right">Sim</option>
-                                    <option value="left">Não</option>
                                 </select>
                             </div>
                         </div>
@@ -191,17 +169,8 @@
                         <div class="filter">
                             <label for="filter-category">Continente</label>
                             <div class="field">
-                                <select name="filter-category"
-                                    id="filter-category">
-                                    <option value>Todos os Continentes</option>
-                                    <option value="north_america">América do
-                                        Norte</option>
-                                    <option value="south_america">América do
-                                        Sul</option>
-                                    <option value="europe">Europa</option>
-                                    <option value="africa">África</option>
-                                    <option value="asia">Ásia</option>
-                                    <option value="oceania">Oceania</option>
+                                <select name="filter-category" id="filter-category">
+
                                 </select>
                             </div>
                         </div>
@@ -211,9 +180,6 @@
                                 Únicas</label>
                             <div class="field">
                                 <select name="filter-tag" id="filter-tag">
-                                    <option value>Todas as
-                                        Características</option>
-                                    <!-- Opções de características únicas serão adicionadas dinamicamente -->
                                 </select>
                             </div>
                         </div>
@@ -222,24 +188,15 @@
                             <label for="filter-highway-color">Cor das
                                 Linhas</label>
                             <div class="field">
-                                <select name="filter-highway-color"
-                                    id="filter-highway-color">
-                                    <option value>Todas as Cores</option>
-                                    <!-- Opções de cores de linha serão adicionadas dinamicamente -->
+                                <select name="filter-highway-color" id="filter-highway-color">
                                 </select>
                             </div>
                         </div>
 
                         <div class="filter">
-                            <label for="filter-pedestrian-sign">Placa de
-                                Pedestre</label>
+                            <label for="filter-pedestrian-sign">Placa de Pedestre</label>
                             <div class="field">
-                                <select name="filter-pedestrian-sign"
-                                    id="filter-pedestrian-sign">
-                                    <option value>Todas as Opções</option>
-                                    <option value="yes">Sim</option>
-                                    <option value="no">Não</option>
-                                </select>
+                                <select name="filter-pedestrian-sign" id="filter-pedestrian-sign"></select>
                             </div>
                         </div>
 
@@ -247,17 +204,12 @@
                             <label for="filter-follow-cars">Carros
                                 Seguindo</label>
                             <div class="field">
-                                <select name="filter-follow-cars"
-                                    id="filter-follow-cars">
-                                    <option value>Todas as Opções</option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Não">Não</option>
+                                <select name="filter-follow-cars" id="filter-follow-cars">
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="maps">
                     <div class="wrapper">
                         <table id="maps" cellspacing="0">
@@ -276,14 +228,11 @@
                                         Pedestre</th>
                                     <th data-col="follow_cars">Carros
                                         Seguindo</th>
-                                    <th data-col="updated">Adicionado</th>
                                     <th data-col="tags">Características
                                         Únicas</th>
-                                    <th>Operações</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                         <div class="modal" id="modal">
                             <div id="modalContent">
@@ -295,38 +244,21 @@
             </div>
 
             <script>
+// Passa a flag isAdmin para o JavaScript
+const isAdmin = <%= isAdmin %>;
+
+
 document.addEventListener('DOMContentLoaded', function() {
     var name = "<%= name %>"; // Atribua o valor da variável 'name' aqui
 
     document.getElementById('spanText').textContent = name;
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </script>
 
-            <script src="/pesquisa-texto/main.js" defer></script>
-            <script src="/pesquisa-texto/addpais.js" async></script>
-            <script src="/pesquisa-texto/test.js"></script>
-            <script src="/pesquisa-texto/exclusaopais.js"></script>
+            <script src="/pesquisa_texto/main.js" defer></script>
+            <script src="/pesquisa_texto/addpais.js" async></script>
+            <script src="/pesquisa_texto/test.js"></script>
+            <script src="/pesquisa_texto/exclusaopais.js"></script>
         </body>
     </html>
