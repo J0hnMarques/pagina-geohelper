@@ -168,21 +168,20 @@ body{
     width: 100%;
     height: 100%;
     overflow: none;
-    background-color: rgba(0, 0, 0, 0.4);
     padding-top: 30px;
 }
 
 .modal-content {
-    margin: 5% auto;
     padding: 20px;
-    width: 80%;
-    max-width: 300px;
     position: relative;
+    max-width: 300px;
     color: #000000;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
     border-radius: 25px;
-    animation: flipInY 0.5s;
+    animation: expandOverlay 0.5s;
     background-image: url('/imagem.png');
+    left: 50rem;
+    top: 2.5rem;
 }
 
 .fds a {
@@ -371,7 +370,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: rgb(0, 60, 255);
+    color: rgb(0, 0, 0);
     
 }
 
@@ -459,7 +458,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: rgb(0, 60, 255);
+    color: rgb(0, 0, 0);
     
     
 }
@@ -619,12 +618,12 @@ body{
     align-items: center;
     cursor: pointer;
     margin: 10px auto;
-    transition: margin 0.3s, background-color 0.3s;
+    transition: background-color 0.3s, transform  0.5s;
 }
 
 .clickable-div:hover {
     background-color: #0056b3;
-    margin: 1px auto;
+    transform: scale(1.2);
 }
 
 .ajuda-overlay {
@@ -696,7 +695,15 @@ body{
 
 
 .fechar-menu{ display: none;}
+
 @media (max-width: 860px) {
+
+    .modal-content {
+        left: 20rem;
+        top: 2.5rem;
+    }
+
+
 .hamburguer-menu {
     display: flex;
     flex-direction: column;
@@ -778,6 +785,10 @@ body{
 
 /* Media Queries para responsividade */
 @media (max-width: 600px) {
+    .modal-content {
+        left: 6rem;
+        top: 2.5rem;
+    }
     .div-conteudo-centro {
         flex-direction: row;
         flex-wrap: wrap;
@@ -802,6 +813,10 @@ body{
 
 @media (max-width: 1024px) {
 
+    .modal-content {
+        left: 10rem;
+        top: 2.5rem;
+    }
 
     .arrow-indicator i {
         font-size: 30px;
@@ -814,4 +829,18 @@ body{
         flex-direction: column;
         align-items: center;
     }
+}
+
+
+.filtros-mid{
+
+    width: 91vw;
+    display: flex;
+}
+
+.ajuda-mid{
+    width: 91vw;
+
+    display: flex;
+    flex-direction: column;
 }
