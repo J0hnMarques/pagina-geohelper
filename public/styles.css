@@ -163,3 +163,49 @@
         background-position: 0% 50%;
     }
 }
+
+
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+.overlay2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com transparência */
+    display: none; /* Inicialmente oculto */
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+/* Estilo para o formulário */
+#changePasswordForm {
+    background-color: white; /* Fundo branco do formulário */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+}

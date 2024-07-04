@@ -3,11 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('myModal');
     const modalContent = document.querySelector('.modal-content');
 
-    // Abre o modal ao clicar no texto do span
-    spanText.addEventListener('click', function(event) {
-        event.stopPropagation(); // Impede que o evento clique se propague para o modal
-        modal.style.display = 'block';
-    });
 
     // Fecha o modal ao clicar na área de conteúdo do modal
     modalContent.addEventListener('click', function(event) {
@@ -127,3 +122,36 @@ window.onclick = function(event) {
         menu.classList.remove('active');
     }
 }
+
+
+
+
+function toggleIcons() {
+    const iconContainer = document.querySelector('.icon-container2');
+    const mainIcon = document.querySelector('.main-icon');
+
+    iconContainer.classList.toggle('active');
+    mainIcon.classList.toggle('rotate-icon');
+
+    // Ajustar a altura do contêiner dos ícones conforme a visibilidade
+    if (iconContainer.classList.contains('active')) {
+        iconContainer.style.height = '270px'; // Ajuste conforme necessário
+    } else {
+        iconContainer.style.height = '90px'; // Altura original
+    }
+}
+
+// Fechar os ícones quando clicar fora deles
+document.addEventListener('click', function(event) {
+    const iconContainer = document.querySelector('.icon-container2');
+    const mainIcon = document.querySelector('.main-icon');
+
+    // Verificar se o clique não foi dentro do ícone ou do contêiner dos ícones
+    if (!iconContainer.contains(event.target) && !mainIcon.contains(event.target)) {
+        iconContainer.classList.remove('active');
+        mainIcon.classList.remove('rotate-icon');
+
+        // Voltar suavemente à altura original
+        iconContainer.style.height = '90px'; // Altura original
+    }
+});

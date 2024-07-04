@@ -43,22 +43,205 @@ body{
     color: #007bff;
 }
 
-.header {
-    width: 100%;
-    height: 10vh;
+
+
+
+
+
+
+
+
+
+
+
+
+.container2 {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    background-color: black;
-    color: white;
-    z-index: 99999999;
+    z-index: 99;
+    height: 20px;
+}
+
+.content2 {
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.icon-container2 {
+    height: 50px;
+    overflow: hidden; /* Para esconder os ícones que estão fora do contêiner */
+    transition: height 0.5s ease; /* Transição suave para a altura */
+}
+
+.icon {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    overflow: hidden;
+    
+}
+
+.icon::before, .icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.25s ease;
+    border-radius: 30px;
+
+}
+
+.icon i {
+
+    position: relative;
+    color: #FFFFFF;
+    font-size: 30px;
+    margin-top: 15px;
+    transition: all 0.25s ease;
+}
+
+.icon-fill::before {
+
+    transition-duration: 0.5s;
+    box-shadow: inset 0 0 0 1px #16A085;
+}
+
+.icon-fill:hover::before {
+    
+    box-shadow: inset 0 0 0 60px #16A085;
+}
+
+.icon-enter::after {
+    box-shadow: inset 0 0 0 1px #EB9532;
+}
+
+.icon-enter::before {
+    border-radius: 0;
+    margin-left: -100%;
+    box-shadow: inset 0 0 0 60px #EB9532;
+}
+
+.icon-enter:hover::before {
+    margin-left: 0;
+}
+
+.icon-expand::after {
+    box-shadow: inset 0 0 0 1px #C82647;
+}
+
+.icon-expand::before {
+    background: #C82647;
+    box-shadow: inset 0 0 0 60px #2d2c3e;
+}
+
+.icon-expand:hover::before {
+    box-shadow: inset 0 0 0 1px #2d2c3e;
+}
+
+.icon-collapse::before {
+    border-radius: 0;
+}
+
+.icon-collapse:hover::before {
+    box-shadow: inset 0 30px 0 0 #8CC63F, inset 0 -30px 0 0 #8CC63F;
+}
+
+.icon-collapse::after {
+    box-shadow: inset 0 0 0 1px #8CC63F;
+}
+
+.icon-rotate {
+    box-shadow: inset 0 0 0 1px #7E3661;
+}
+
+.icon-rotate::after, .icon-rotate::before {
+    border: 0px solid transparent;
+}
+
+.rotate-icon {
+    animation: rotate 0.5s ease forwards;
+}
+
+/* Adicionado para controlar visibilidade dos ícones adicionais */
+.icon-container2 .icon:not(.main-icon) {
+    display: none;
+}
+
+.icon-container2.active .icon:not(.main-icon) {
+    display: inline-block;
+}
+
+/* Animação de rotação */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    width: 30%;
+    height: 22%;
+    border-radius: 0px 0px 20rem 0px ;
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 0;
+    transition: top 0.3s ease-in-out; /* Transição suave para a mudança de posição */
+    z-index: 1000; /* Certifique-se de que o cabeçalho esteja acima de outros conteúdos */
+}
+
+.header-nav{
+    width: 90%;
 }
 
 .header-nav ul {
     display: flex;
-    gap: 3rem;
+    justify-content: center;
+    gap: 1rem;
     margin: 0;
+    margin-top: 1rem;
     padding: 0;
     z-index: 99999999;
 }
@@ -222,14 +405,11 @@ body{
 }
 .tabs{
     display: flex;
-    width: 23vw;
+    align-items: center;
+    width: 100%;
     background-color: #fff;
     border-bottom: 1px solid #ccc;
     justify-content: center;
-    border-top: 2px solid #007bff;
-    border-left: 4px solid #007bff;
-    border-right: 4px solid #007bff;
-    border-bottom: 3px solid #007bff;
     border-radius: 25px 25px 0px 0px;
     border-bottom: none;
     background: transparent
