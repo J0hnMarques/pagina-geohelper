@@ -6,10 +6,47 @@
     <title>Geo Helper</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="cards.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap');
+    /* Estilos para o modal */
+.custom-modal {
+  display: none; /* Ocultar por padrão */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5); /* Fundo semi-transparente */
+}
+
+.custom-modal .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  text-align: center;
+}
+
+.custom-modal .close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.custom-modal .close-btn:hover,
+.custom-modal .close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
     </style>
     
     <script src="https://kit.fontawesome.com/57c017c42a.js" crossorigin="anonymous"></script>
@@ -79,9 +116,9 @@
     <div class="formulario-login">
             <form id="register-form">
                 <h2>Registrar</h2>
-                <input type="text" name="name" placeholder="Nome" required>
-                <input type="text" name="username" placeholder="Usuário" required>
-                <input type="password" name="password" placeholder="Senha" required>
+                <input type="text" name="name" placeholder="Nome" maxlength="15" required>
+                <input type="text" name="username" placeholder="Usuário" minlength="5" required>
+                <input type="password" name="password" placeholder="Senha" minlength="5" required>
                 <button type="submit">Registrar</button>
                 <p id="register-message" style="display: none;"></p>
             </form>
@@ -100,154 +137,212 @@
             <h2>Alterar Senha</h2>
             <form id="changePasswordForm">
                 <label for="currentPassword">Senha Atual:</label>
-                <input type="password" id="currentPassword" name="currentPassword" required><br>
+                <input type="password" id="currentPassword" name="currentPassword" maxlength="15" required><br>
                 <label for="newPassword">Nova Senha:</label>
-                <input type="password" id="newPassword" name="newPassword" required><br>
+                <input type="password" id="newPassword" name="newPassword" maxlength="15"required><br>
                 <label for="confirmPassword">Confirmar Nova Senha:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+                <input type="password" id="confirmPassword" name="confirmPassword" maxlength="15"required><br>
                 <button type="button" onclick="changePassword()">Alterar Senha</button>
                 <p id="changePasswordMessage" style="color: red; display: none;"></p>
             </form>
         </div>
     </div>
 
-    <!-- Conteúdo Principal -->
-    <main class="main">
-        <div class="video-background">
-            <video id="bg-video" autoplay muted loop>
-                <source src="/video/video.mp4" type="video/mp4">
-                Seu navegador não suporta vídeos HTML5.
-            </video>
-        </div>
-
-        <section id="home">
-        </section>
-        <section id="Ajuda">
-            <h1>Qual objetivo desse projeto?</h1>
  
 
-            <div class="content">
-                <p>Auxiliar jogadores de geoguessr em todo o mundo nas suas partidas, sendo um helper. Temos uma <strong style="color: aqua;">API</strong> poderosa implantada que foi desenvolvida por nós, que funciona como um grande filtro complexo e completo, que é atualizado frequentemente. Facilitando sua jogatina</p>
-                
-                <div style="display: flex; justify-content: center; gap: 2vh;"><i class="fa-solid fa-arrow-down" style="font-size: 25px;"></i><h4><strong style="color: aqua;">Funciona Assim</strong></h4><i class="fa-solid fa-arrow-down" style="font-size: 25px;"></i></div>
-        <div class="div-conteúdo-centro">
-            <div class="titulo-conteúdo-centro">
-<div class="ajuda-mid">
-                <div class="clickable-div" onclick="openOverlay(1)">
-                    <p>Como uso isso ?</p>
-                </div>
-
-
-                <div class="clickable-div" onclick="openOverlay(4)">
-                    <p>Pode dar <strong style="color: red; font: bold;">ban</strong> ?</p>
-                </div>
-</div>
-
-
-
-<div class="filtros-mid">
-                    <div class="clickable-div">
-                        <button style="background: transparent; border: 0; color: azure; font-size: 14px;"><a href="/Simples" style="width: 20vh; background: transparent; text-decoration: none; color: azure; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px;">Pesquisa Simples</a></button>
-                        
-                    </div>
-                    <div class="clickable-div">
-                        <button style="background: transparent; border: 0; color: azure; font-size: 14px;"><a href="#services" style="width: 20vh; background-color: transparent; text-decoration: none; color: azure; font-family: 'Poppins', sans-serif; font-weight: 700;font-size: 18px;">Pesquisa Avançada</a></button>
-                    </div>
-</div>
+<!--<p>Alterar</p>-->
 
 
 
 
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main-content">
+        <div class="concept concept-one">
+          <div class="hover hover-1"></div>
+          <div class="hover hover-2"></div>
+          <div class="hover hover-3"></div>
+          <div class="hover hover-4"></div>
+          <div class="hover hover-5"></div>
+          <div class="hover hover-6"></div>
+          <div class="hover hover-7"></div>
+          <div class="hover hover-8"></div>
+          <div class="hover hover-9"></div>
+          <h1 style="color: azure;">Qual objetivo desse projeto?</h1>
+          <p>Auxiliar jogadores de geoguessr em todo o mundo nas suas partidas, sendo um helper. Temos uma <strong style="color: aqua;">API</strong> poderosa implantada que foi desenvolvida por nós, que funciona como um grande filtro complexo e completo, que é atualizado frequentemente. Facilitando sua jogatina</p>
+          <i class="fa-solid fa-arrow-down" style="font-size: 25px; color: azure;"></i><h4><strong style="color: aqua;">Funciona Assim</strong></h4><i class="fa-solid fa-arrow-down" style="font-size: 25px; color: azure;"></i>
         </div>
-            
-            <div class="ajuda-overlay" id="ajuda-overlay-1">
-                <div class="overlay-content">
-                    <span class="close" onclick="closeOverlay(1)">×</span>
-                    <h2>Utilização</h2>
-                    <h3>EM BREVE</h3>
-                    <!--<p>EM BREVE</p>-->
-                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="concept concept-four">
+          <div class="mae">
+         <h1 style="color: black;">Serviços</h1> 
+    <div class="cards-play">
+        <a href="/simples" alt="Geoguessr-busca" target="">
+            <div class="card">
+              <div class="wrapper">
+                <img src="/image/card1.png" class="cover-image" />
+              </div>
+              <img src="/image/texto.png" class="title" />
+              <img src="image/objeto-card1.png" class="character" />
             </div>
-            
-            <div class="ajuda-overlay" id="ajuda-overlay-2">
-                <div class="overlay-content">
-                    <span class="close" onclick="closeOverlay(2)">×</span>
-                    <h2>Tipos de buscas</h2>
-                    <h3>EM BREVE</h3>
-                    <!--<p>EM BREVE</p>-->
-                </div>
+          </a>
+          
+          <a href="/" alt="Mythrill" target="_blank">
+            <div class="card">
+              <div class="wrapper">
+                <img src="image/card2.png" class="cover-image" />
+              </div>
+              <img src="/image/texto2.png" class="title" />
+              <img src="image/objeto-card2.png" class="character" />
             </div>
-            
-            <div class="ajuda-overlay" id="ajuda-overlay-3">
-                <div class="overlay-content">
-                    <span class="close" onclick="closeOverlay(3)">×</span>
-                    <h2>Duvidas</h2>
-                    <h3>EM BREVE</h3>
-                    <!--<p>EM BREVE</p>-->
-                </div>
-            </div>
-            
-            <div class="ajuda-overlay" id="ajuda-overlay-4">
-                <div class="overlay-content">
-                    <span class="close" onclick="closeOverlay(4)">×</span>
-                    <h2>riscos</h2>
-                    <h3>EM BREVE</h3>
-                    <!--<p>EM BREVE</p>-->
-                </div>
-            </div>
-
-
-
-
-
-
-
-        </section>
-
-
-
-
-
-
-
-
-        <footer class="footer">
-            <p>&copy; 2024 GeoHelper</p>
-        </footer>
+          </a>
     
-    </main>
+          <a href="/" alt="Mythrill" target="_blank">
+            <div class="card">
+              <div class="wrapper">
+                <img src="/image/card3.png" class="cover-image" />
+              </div>
+              <img src="/image/texto3.png" class="title" />
+              <img src="image/objeto-card3.png" class="character" />
+            </div>
+          </a>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+        </div>
 
-    <!-- Rodapé -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="concept concept-three">
+          <div class="word">
+            <div class="hover">
+              <div></div>
+              <div></div>
+              <h1>D</h1>
+            </div>
+            <div class="hover">
+              <div></div>
+              <div></div>
+              <h1>U</h1>
+            </div>
+            <div class="hover">
+              <div></div>
+              <div></div>
+              <h1>V</h1>
+            </div>
+            <div class="hover">
+                <div></div>
+                <div></div>
+                <h1>I</h1>
+              </div>
+              <div class="hover">
+                <div></div>
+                <div></div>
+                <h1>D</h1>
+              </div>
+              <div class="hover">
+                <div></div>
+                <div></div>
+                <h1>A</h1>
+              </div>
+              <div class="hover">
+                <div></div>
+                <div></div>
+                <h1>S</h1>
+              </div>
+          </div>
+        </div>
+        <div class="concept concept-six">
+          <h1 class="word"><span class="char">C</span><span class="char">O</span><span class="char">N</span><span class="char">T</span><span class="char">A</span><span class="char">T</span><span class="char">O</span>
+          </h1>
+        </div>
+</div>
+   <!-- Video -->
+<div class="video-background" id="myVideo">
+    <video id="myVideo" autoplay muted loop><source src="/video/video.mp4" type="video/mp4"> Seu navegador não suporta vídeos HTML5.</video>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <script>
-// Função para abrir o overlay
-function openOverlay(id) {
-    const overlayId = `ajuda-overlay-${id}`;
-    const overlay = document.getElementById(overlayId);
-    overlay.classList.add("active");
-}
 
-// Função para fechar o overlay
-function closeOverlay(id) {
-    const overlayId = `ajuda-overlay-${id}`;
-    const overlay = document.getElementById(overlayId);
-    const overlayContent = overlay.querySelector(".overlay-content");
-    overlayContent.classList.add("closing");
-    setTimeout(() => {
-        overlay.classList.remove("active");
-        overlayContent.classList.remove("closing");
-    }, 500); // Tempo correspondente à duração da animação closeOverlay (0.5s)
-}
 
-// Event listener para fechar o overlay quando clicar no botão .close
-document.querySelectorAll(".close").forEach(button => {
-    button.addEventListener("click", function() {
-        const overlayId = this.dataset.overlayId;
-        closeOverlay(overlayId);
-    });
-});
 
 // Event listener para o carregamento do DOM
 document.addEventListener('DOMContentLoaded', function() {
@@ -484,7 +579,37 @@ function openTab(evt, tabName) {
     }
 }
 
+
+
+
+// Exibir o modal quando a página carrega
+document.addEventListener('DOMContentLoaded', function() {
+  var modal = document.getElementById('loginModal');
+  modal.style.display = 'block';
+  
+  // Fechar o modal se clicar no 'x' ou fora dele
+  var closeBtn = document.querySelector('.custom-modal .close-btn');
+  closeBtn.onclick = function() {
+    modal.style.display = 'none';
+    window.location.href = '/'; // Redirecionar após fechar o modal
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      window.location.href = '/'; // Redirecionar se clicar fora do modal
+    }
+  }
+});
+
+
+
+
+
+
+
+
     </script>
     <script src="script.js"></script>
+    
 </body>
 </html>
