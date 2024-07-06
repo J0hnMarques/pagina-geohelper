@@ -54,14 +54,14 @@
 	background: url("/video/video.mp4")
 		no-repeat center center / cover;
 
-	p{
+	p {
 		color: azure;
 		position: absolute;
-		margin: 10rem;
+		margin: 2rem;
 		left: 0;
 		right: 0;
 		top: 50%;
-		margin-top: -30px;
+		margin-top: -28px;
 		transition: 0.5s ease;
 		z-index: 0;
 	}
@@ -71,7 +71,7 @@
 		left: 0;
 		right: 0;
 		top: 30%;
-		margin-top: -30px;
+		margin-top: -25px;
 		transition: 0.5s ease;
 		z-index: 0;
 		letter-spacing: 25px;
@@ -114,35 +114,19 @@
 	padding: 5em;
 	.word {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		max-width: 500px;
 		margin: auto;
 	}
 	background: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/background/canyon.jpg)
 		center center / cover;
-	.hover {
-		flex: 1;
-		display: grid;
-		height: calc(100vh - 10em);
-		grid: repeat(2, 2fr) / 100%;
-		position: relative;
-		div {
-			position: relative;
-			z-index: 5;
-		}
-		div:nth-child(1):hover ~ h1 {
-			margin-top: -10px;
-		}
-		div:nth-child(2):hover ~ h1 {
-			margin-top: -50px;
-		}
-	}
 	h1 {
 		position: absolute;
 		margin: auto;
 		left: 0;
 		right: 0;
-		top: 50%;
+		top: 10%;
 		margin-top: -30px;
 		transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 		z-index: 0;
@@ -155,7 +139,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	letter-spacing: 2em;
+	letter-spacing: 2rem;
 	background: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/background/glacier.jpg)
 		no-repeat center center / cover;
 	h1 {
@@ -172,48 +156,68 @@
 .concept-six {
 	display: flex;
 	align-items: center;
-	background: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/background/beach.jpg) top
-		right / cover;
-	.word {
-		width: 550px;
-		margin: auto;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 80%;
-		&:hover {
-			.char:nth-child(1) {
-				margin-top: -30px;
-				transform: rotate(-20deg);
-			}
-			.char:nth-child(2) {
-				margin: -40px 0px 0 10px;
-				transform: rotate(5deg);
-			}
-			.char:nth-child(3) {
-				margin: 15px 0 0 10px;
-				transform: rotate(12deg);
-			}
-			.char:nth-child(4) {
-				margin: -25px 0 0;
-				transform: rotate(5deg);
-			}
-			.char:nth-child(5) {
-				margin: -40px 5px 0;
-				transform: rotate(-10deg);
-			}
-		}
-	}
-	.char {
-		flex: 1;
-		transition: 0.3s ease-in-out;
-		position: relative;
-	}
-	form{
-		z-index: 99;
-	}
-}
+	background: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/background/beach.jpg)
+	  top right / cover;
 
+	.word {
+	  width: 550px;
+	  margin: auto;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  height: 80%;
+  
+	  &:hover {
+		.char:nth-child(1) {
+		  margin-top: -30px;
+		  transform: rotate(-20deg);
+
+		}
+		.char:nth-child(2) {
+			margin-top: -30px;
+			transform: rotate(-20deg);
+
+		}
+		.char:nth-child(3) {
+			margin-top: -30px;
+			transform: rotate(-20deg);
+
+
+		}
+		.char:nth-child(4) {
+			margin-top: -30px;
+			transform: rotate(-20deg);
+
+		}
+		.char:nth-child(5) {
+			margin-top: -30px;
+			transform: rotate(-20deg);
+
+		}
+		.char:nth-child(6) {
+			margin-top: -30px;
+			transform: rotate(-20deg);
+
+		  }
+		  .char:nth-child(7) {
+			margin-top: -30px;
+			transform: rotate(-20deg);
+
+		  }
+	  }
+	}
+  
+	.char {
+	  flex: 1;
+	  transition: 0.3s ease-in-out;
+	  position: relative;
+	
+	}
+  
+	form {
+	  z-index: 99;
+	}
+  }
 
 @keyframes jump-out {
 	0% {

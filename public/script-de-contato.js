@@ -17,7 +17,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         if (data.success) {
             document.getElementById('successMessage').style.display = 'block';
         } else {
-            alert('Erro ao enviar a mensagem. Tente novamente.');
+            alert('Por favor, espere 2 minutos antes de enviar outra mensagem.');
         }
     })
     .catch(error => {

@@ -104,26 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-document.querySelector('.fechar-menu').addEventListener('click', function() {
-    document.querySelector('.hamburguer-nav').classList.remove('active');
-    // Outras ações necessárias, como remover a classe 'active' do botão hambúrguer
-});
-
-// Função para mostrar/esconder o menu hambúrguer
-function toggleMenu() {
-    var menu = document.querySelector('.hamburguer-nav');
-    menu.classList.toggle('active');
-}
-
-// Função para fechar o menu ao clicar fora dele (opcional)
-window.onclick = function(event) {
-    var menu = document.querySelector('.hamburguer-nav');
-    if (event.target == menu) {
-        menu.classList.remove('active');
-    }
-}
-
-
 
 
 function toggleIcons() {

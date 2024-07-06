@@ -7,8 +7,12 @@ const validator = require('validator');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
+const NodeCache = require('node-cache');
 
 const app = express();
+const cache = new NodeCache({ stdTTL: 120 });
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -417,6 +421,14 @@ app.post('/contact', (req, res) => {
     if (!name || !email || !message) {
         return res.status(400).json({ success: false, message: 'Todos os campos são obrigatórios' });
     }
+
+    // Verificar se o email já enviou uma mensagem nos últimos 2 minutos
+    if (cache.has(email)) {
+        return res.status(429).json({ success: false, message: 'Por favor, espere 2 minutos antes de enviar outra mensagem.' });
+    }
+
+    // Armazenar o email no cache com um TTL de 2 minutos
+    cache.set(email, true);
 
     // Configurar o Nodemailer com Zoho
     const transporter = nodemailer.createTransport({
