@@ -26,11 +26,11 @@ app.use(session({
 
 // Configuração do MySQL
 const db = mysql.createConnection({
-    host: 'monorail.proxy.rlwy.net',
-    user: 'root',
-    password: 'ktBGqKJfvHnnZGMaQKmlkLjeroONdFZt',
-    database: 'railway',
-    port: 48591
+    host: '10.94.1.3',
+    user: 'admin',
+    password: '12345',
+    database: 'geohelper',
+    port: 3306
 });
 
 db.connect((err) => {
