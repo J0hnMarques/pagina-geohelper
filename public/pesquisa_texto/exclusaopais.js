@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Função para buscar os dados dos países
     async function fetchCountriesData() {
         try {
-            const response = await fetch('https://api-dos-paises-xuyr5hgg2a-rj.a.run.app/countries/');
+            const response = await fetch('https://api.geohelper.xyz/countries/');
             if (!response.ok) {
                 throw new Error('Erro ao buscar dados dos países.');
             }
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (event.target.classList.contains('delete-button')) {
                     const countryName = event.target.dataset.country;
                     try {
-                        const response = await fetch(`https://api-dos-paises-xuyr5hgg2a-rj.a.run.app/countries/${encodeURIComponent(countryName)}`, {
+                        const response = await fetch(`https://api.geohelper.xyz/countries/${encodeURIComponent(countryName)}`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json'

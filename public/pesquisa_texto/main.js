@@ -7,7 +7,7 @@ let countries = [];
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('https://api-dos-paises-xuyr5hgg2a-rj.a.run.app/countries')
+    fetch('https://api.geohelper.xyz/countries')
         .then(response => response.json())
         .then(data => {
             DATA.countries = data;
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
             countryData[key] = value;
         });
 
-        fetch('https://api-dos-paises-xuyr5hgg2a-rj.a.run.app/countries', {
+        fetch('https://api.geohelper.xyz/countries', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Função para buscar e renderizar os países na tabela
     async function fetchAndRenderCountries() {
         try {
-            const response = await fetch('https://api-dos-paises-xuyr5hgg2a-rj.a.run.app/countries');
+            const response = await fetch('https://api.geohelper.xyz/countries');
             if (!response.ok) {
                 throw new Error('Erro ao buscar dados dos países.');
             }
